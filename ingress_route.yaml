@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: shortener
+spec:
+  entryPoints:
+  - web
+  routes:
+    - match: Host(`shortener.localhost`)
+      kind: Rule
+      services:
+        - name: shortener
+          port: 8000
+

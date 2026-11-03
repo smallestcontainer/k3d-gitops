@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shortener-deploy
+  labels:
+    app: shortener
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: shortener
+  template:
+    metadata:
+      labels:
+        app: shortener
+
+    spec:
+      containers:
+      - name: shortener
+        image: smallescontainer/url-shortener:test
+        ports:
+        - containerPort: 8000
