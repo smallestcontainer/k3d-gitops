@@ -1,0 +1,8 @@
+resources:
+  - deploy.yaml
+  - service.yaml
+  - ingress_route.yaml
+
+images:
+  - name: smallescontainer/url-shortener
+    newTag: newTag

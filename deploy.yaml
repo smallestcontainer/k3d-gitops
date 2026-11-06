@@ -13,10 +13,9 @@ spec:
     metadata:
       labels:
         app: shortener
-
     spec:
       containers:
       - name: shortener
-        image: smallescontainer/url-shortener:test
+        image: smallestcontainer/url-shortener:test
         ports:
         - containerPort: 8000
