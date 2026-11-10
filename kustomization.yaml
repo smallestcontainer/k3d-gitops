@@ -7,6 +7,6 @@ images:
 - name: smallescontainer/url-shortener
   newTag: newTag
 - name: smallestcontainer/url-shortener
-  newTag: 11825d1
+  newTag: 7bdf585
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
