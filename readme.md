@@ -123,6 +123,14 @@ curl -X POST http://shortener.localhost/ \
   -d '{"url": "https://example.com"}'
 ```
 
+The response contains a short link on `http://localhost:8000/<code>`: `deploy.yaml` does
+not set the application's `BASE_URL`, so it falls back to its local default. Open the
+code on the application host instead, e.g. `http://shortener.localhost/<code>`.
+
+The deployed application keeps links in each pod's memory. With 3 replicas a code
+created on one pod returns 404 when the request lands on another, and all links are lost
+when pods restart.
+
 - Application: the host from `ingress_route.yaml` (API docs at `/docs`)
 - Traefik dashboard: the dashboard host from `values.yaml`
 
@@ -148,10 +156,12 @@ ArgoCD web UI:
 ```bash
 kubectl -n argocd get secret argocd-initial-admin-secret \
   -o jsonpath='{.data.password}' | base64 -d; echo   # password for the admin user
-kubectl -n argocd port-forward svc/argocd-server 8080:443
+kubectl -n argocd port-forward svc/argocd-server 9090:443
 ```
 
-Then open https://localhost:8080 and log in as `admin`.
+Then open https://localhost:9090 and log in as `admin`. Port 8080 is avoided because
+the Jenkins from [jenkins-gitops](https://github.com/smallestcontainer/jenkins-gitops)
+publishes its web UI there.
 
 ## Removal
 
